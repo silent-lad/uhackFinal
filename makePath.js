@@ -39,7 +39,7 @@ var minDistance = (latLongArray, loc) => {
   });
 };
 
-var track = ()
+// var track = ()
 // pathMaker(origin, destination);
 
 module.exports.pathMaker = pathMaker;

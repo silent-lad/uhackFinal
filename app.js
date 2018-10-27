@@ -1,6 +1,7 @@
 const express = require("express");
 var bodyParser = require("body-parser");
 const shell = require("shelljs");
+const fs = require("file-system");
 
 const mongoose = require("mongoose");
 
@@ -109,6 +110,16 @@ app.post("/query", (req, res) => {
 app.post("/makepath", (req, res) => {
   mkp.pathMaker(req.body.origin, req.body.destination, path => {
     // console.log("sc2");
+    fs.writeFile(
+      `./paths/${req.body.pathName}.json`,
+      JSON.stringify(path),
+      err => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+    // var newPath = require(`./${req.body.pathName}.json`);
 
     res.status(200).send(JSON.stringify(path));
   });
@@ -120,7 +131,7 @@ app.post("/track", (req, res) => {});
 //Message: Server Start!!
 app.listen(3000, () => {
   console.log("Server up on 3000");
-  schema.find({ isActive: true }, activeCampaigns => {
-    realtime.serverStart(activeCampaigns, client, schema);
-  });
+  // schema.find({ isActive: true }, activeCampaigns => {
+  // realtime.serverStart(activeCampaigns, client, schema);
+  // });
 });
